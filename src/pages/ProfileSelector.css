@@ -150,6 +150,64 @@
     font-weight: 500;
 }
 
+/* Difficulty Selector */
+.difficulty-selector {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+.difficulty-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    background: var(--color-bg-secondary);
+    border: 3px solid transparent;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.difficulty-btn:hover {
+    transform: scale(1.05);
+}
+
+.difficulty-btn.selected {
+    border-color: var(--color-primary);
+}
+
+.difficulty-btn.beginner.selected {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+}
+
+.difficulty-btn.intermediate.selected {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.difficulty-btn.advanced.selected {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+}
+
+.diff-icon {
+    font-size: 2rem;
+}
+
+.diff-label {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-base);
+}
+
+.profile-card-level {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--gradient-candy);
+    border-radius: var(--radius-md);
+}
+
 .form-actions {
     display: flex;
     gap: var(--spacing-md);

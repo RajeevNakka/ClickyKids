@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useProfile } from '../contexts/ProfileContext';
 import './ProfileSelector.css';
 
 const avatars = ['👦', '👧', '🧒', '👶', '🐱', '🐶', '🐰', '🦊', '🐻', '🐼', '🦁', '🐸'];
+const difficulties = ['beginner', 'intermediate', 'advanced'];
 
 function ProfileSelector() {
     const { t } = useTranslation();
@@ -15,8 +16,19 @@ function ProfileSelector() {
     const [newProfile, setNewProfile] = useState({
         name: '',
         dob: '',
-        avatar: '👦'
+        avatar: '👦',
+        difficulty: 'beginner'
     });
+
+    const age = newProfile.dob ? calculateAge(newProfile.dob) : null;
+
+    // Auto-suggest difficulty when age changes, but user can override
+    useEffect(() => {
+        if (age !== null) {
+            const suggested = suggestDifficulty(age);
+            setNewProfile(prev => ({ ...prev, difficulty: suggested }));
+        }
+    }, [age, suggestDifficulty]);
 
     const handleSelectProfile = (profile) => {
         selectProfile(profile.id);
@@ -31,9 +43,6 @@ function ProfileSelector() {
             navigate('/');
         }
     };
-
-    const age = newProfile.dob ? calculateAge(newProfile.dob) : null;
-    const suggestedLevel = age !== null ? suggestDifficulty(age) : null;
 
     return (
         <div className="profile-selector-page">
@@ -57,6 +66,7 @@ function ProfileSelector() {
                                     <span className="profile-card-age">
                                         {calculateAge(profile.dob)} {t('profile.years')}
                                     </span>
+                                    <span className="profile-card-level">{profile.difficulty}</span>
                                 </button>
                             ))}
                         </div>
@@ -109,11 +119,27 @@ function ProfileSelector() {
                             {age !== null && (
                                 <div className="age-display">
                                     <span className="age-value">{age} {t('profile.years')}</span>
-                                    <span className="suggested-level">
-                                        {t('profile.difficulty')}: {t(`profile.${suggestedLevel}`)}
-                                    </span>
                                 </div>
                             )}
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">{t('profile.difficulty')}</label>
+                            <div className="difficulty-selector">
+                                {difficulties.map(level => (
+                                    <button
+                                        key={level}
+                                        type="button"
+                                        className={`difficulty-btn ${level} ${newProfile.difficulty === level ? 'selected' : ''}`}
+                                        onClick={() => setNewProfile(prev => ({ ...prev, difficulty: level }))}
+                                    >
+                                        <span className="diff-icon">
+                                            {level === 'beginner' ? '🌱' : level === 'intermediate' ? '🌿' : '🌳'}
+                                        </span>
+                                        <span className="diff-label">{t(`profile.${level}`)}</span>
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="form-actions">
@@ -127,7 +153,7 @@ function ProfileSelector() {
                                 </button>
                             )}
                             <button type="submit" className="btn btn-large btn-success">
-                                ✓ {t('home.welcome')}
+                                ✓ Start!
                             </button>
                         </div>
                     </form>
@@ -138,3 +164,4 @@ function ProfileSelector() {
 }
 
 export default ProfileSelector;
+
