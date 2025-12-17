@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAudio } from '../hooks/useAudio';
 import { useProgress } from '../contexts/ProgressContext';
@@ -9,7 +9,12 @@ import './MouseGames.css';
 function MouseGames() {
     const { gameId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const { t } = useTranslation();
+
+    // Determine if we came from mouse learning or games section
+    const fromMouse = location.pathname.startsWith('/mouse/games');
+    const backPath = fromMouse ? '/mouse' : '/mouse/games';
 
     // Show game menu or specific game
     if (!gameId) {
@@ -18,12 +23,12 @@ function MouseGames() {
 
     switch (gameId) {
         case 'bubbles':
-            return <BubblePopGame navigate={navigate} t={t} />;
+            return <BubblePopGame navigate={navigate} t={t} backPath={backPath} />;
         case 'movement':
         case 'butterfly':
-            return <ButterflyGame navigate={navigate} t={t} />;
+            return <ButterflyGame navigate={navigate} t={t} backPath={backPath} />;
         case 'shapes':
-            return <ShapeMatchGame navigate={navigate} t={t} />;
+            return <ShapeMatchGame navigate={navigate} t={t} backPath={backPath} />;
         default:
             return <GameMenu navigate={navigate} t={t} />;
     }
@@ -56,7 +61,7 @@ function GameMenu({ navigate, t }) {
     );
 }
 
-function BubblePopGame({ navigate, t }) {
+function BubblePopGame({ navigate, t, backPath }) {
     const { playSound, feedback } = useAudio();
     const { completeExercise, recordAccuracy, startSession, endSession } = useProgress();
     const { getActiveDifficultySettings } = useProfile();
@@ -114,7 +119,7 @@ function BubblePopGame({ navigate, t }) {
 
     return (
         <div className="game-container bubble-game" ref={gameRef}>
-            <button className="exit-game-btn" onClick={() => navigate('/mouse/games')}>✕</button>
+            <button className="exit-game-btn" onClick={() => navigate(backPath)}>✕</button>
 
             <div className="game-hud">
                 <span className="score">🫧 {popped}</span>
@@ -142,7 +147,7 @@ function BubblePopGame({ navigate, t }) {
     );
 }
 
-function ButterflyGame({ navigate, t }) {
+function ButterflyGame({ navigate, t, backPath }) {
     const { speak, feedback } = useAudio();
     const { startSession, endSession } = useProgress();
 
@@ -194,7 +199,7 @@ function ButterflyGame({ navigate, t }) {
 
     return (
         <div className="game-container butterfly-game" onMouseMove={handleMouseMove}>
-            <button className="exit-game-btn" onClick={() => navigate('/mouse/games')}>✕</button>
+            <button className="exit-game-btn" onClick={() => navigate(backPath)}>✕</button>
 
             <div className="game-hud">
                 <span className="score">🦋 {catches}</span>
@@ -214,7 +219,7 @@ function ButterflyGame({ navigate, t }) {
     );
 }
 
-function ShapeMatchGame({ navigate, t }) {
+function ShapeMatchGame({ navigate, t, backPath }) {
     const { playSound, feedback } = useAudio();
     const { completeExercise, startSession, endSession } = useProgress();
 
@@ -222,19 +227,14 @@ function ShapeMatchGame({ navigate, t }) {
     const [targetShape, setTargetShape] = useState('🔴');
     const [displayShapes, setDisplayShapes] = useState([]);
     const [matched, setMatched] = useState(0);
-    const [draggedShape, setDraggedShape] = useState(null);
+    const [isInitialized, setIsInitialized] = useState(false);
 
-    useEffect(() => {
-        startSession('mouseDragDrop');
-        generateNewRound();
-        return () => endSession();
-    }, [startSession, endSession]);
-
-    const generateNewRound = () => {
+    // Memoize generateNewRound to prevent re-creation
+    const generateNewRound = useCallback(() => {
         const target = shapes[Math.floor(Math.random() * shapes.length)];
         setTargetShape(target);
 
-        // Create 4-6 shapes to choose from
+        // Create 5 shapes to choose from
         const count = 5;
         const shapeList = [];
         for (let i = 0; i < count; i++) {
@@ -247,7 +247,17 @@ function ShapeMatchGame({ navigate, t }) {
         }
         // Shuffle
         setDisplayShapes(shapeList.sort(() => Math.random() - 0.5));
-    };
+    }, []);
+
+    // Initialize game only once on mount
+    useEffect(() => {
+        startSession('mouseDragDrop');
+        if (!isInitialized) {
+            generateNewRound();
+            setIsInitialized(true);
+        }
+        return () => endSession();
+    }, [startSession, endSession]); // Removed generateNewRound from deps
 
     const handleShapeClick = (shape) => {
         if (shape.shape === targetShape) {
@@ -262,7 +272,7 @@ function ShapeMatchGame({ navigate, t }) {
 
     return (
         <div className="game-container shape-game">
-            <button className="exit-game-btn" onClick={() => navigate('/mouse/games')}>✕</button>
+            <button className="exit-game-btn" onClick={() => navigate(backPath)}>✕</button>
 
             <div className="game-hud">
                 <span className="score">✓ {matched}</span>
@@ -292,3 +302,4 @@ function ShapeMatchGame({ navigate, t }) {
 }
 
 export default MouseGames;
+
