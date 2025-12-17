@@ -36,6 +36,13 @@ function HomePage() {
             path: '/keyboard'
         },
         {
+            id: 'learn',
+            icon: '📚',
+            title: 'Explore & Learn',
+            gradient: 'var(--gradient-candy)',
+            path: '/learn'
+        },
+        {
             id: 'games',
             icon: '🎮',
             title: t('home.playGames'),

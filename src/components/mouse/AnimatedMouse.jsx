@@ -9,7 +9,7 @@ import './AnimatedMouse.css';
  * - Right click shows blue feedback
  * - Scroll animates the wheel
  */
-function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }) {
+function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta, difficulty = 'easy' }) {
     const { t } = useTranslation();
     const [wheelRotation, setWheelRotation] = useState(0);
     const [showLeftFeedback, setShowLeftFeedback] = useState(false);
@@ -196,7 +196,7 @@ function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }
 
             {/* Cursor replacement */}
             <div
-                className="custom-cursor"
+                className={`custom-cursor cursor-${difficulty}`}
                 style={{ left: x, top: y }}
             >
                 <span className="cursor-dot"></span>

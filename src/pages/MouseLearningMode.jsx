@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useMouseMirror } from '../hooks/useMouseMirror';
 import { useAudio } from '../hooks/useAudio';
 import { useProgress } from '../contexts/ProgressContext';
+import { useProfile } from '../contexts/ProfileContext';
 import AnimatedMouse from '../components/mouse/AnimatedMouse';
 import './MouseLearningMode.css';
 
@@ -13,6 +14,9 @@ function MouseLearningMode() {
     const mouseState = useMouseMirror();
     const { speak, playSound, feedback } = useAudio();
     const { startSession, endSession, addTimeSpent } = useProgress();
+    const { activeProfile } = useProfile();
+
+    const difficulty = activeProfile?.difficulty || 'beginner';
 
     const [lastFeedback, setLastFeedback] = useState(null);
     const [showMenu, setShowMenu] = useState(true);
@@ -135,6 +139,7 @@ function MouseLearningMode() {
                 rightClick={mouseState.rightClick}
                 isScrolling={mouseState.isScrolling}
                 scrollDelta={mouseState.scrollDelta}
+                difficulty={difficulty === 'beginner' ? 'easy' : difficulty === 'intermediate' ? 'medium' : 'advanced'}
             />
 
             {/* Exit button */}

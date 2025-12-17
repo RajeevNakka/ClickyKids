@@ -9,6 +9,7 @@ import ProfileSelector from './pages/ProfileSelector';
 import MouseLearningMode from './pages/MouseLearningMode';
 import MouseGames from './pages/MouseGames';
 import KeyboardLearning from './pages/KeyboardLearning';
+import LearnMode from './pages/LearnMode';
 import ParentDashboard from './pages/ParentDashboard';
 
 // Components
@@ -68,6 +69,9 @@ function App() {
           {/* Keyboard Learning */}
           <Route path="/keyboard" element={<KeyboardLearning />} />
           <Route path="/keyboard/:exerciseId" element={<KeyboardLearning />} />
+
+          {/* Learn Mode */}
+          <Route path="/learn" element={<LearnMode />} />
 
           {/* Parent Dashboard */}
           <Route path="/parent" element={<ParentDashboard />} />

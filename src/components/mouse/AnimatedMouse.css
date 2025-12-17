@@ -150,6 +150,48 @@
     animation: cursorPulse 1.5s ease-in-out infinite;
 }
 
+/* Cursor Size Variants by Difficulty */
+.custom-cursor.cursor-easy .cursor-dot {
+    width: 20px;
+    height: 20px;
+    background: #22C55E;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+}
+
+.custom-cursor.cursor-easy .cursor-ring {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+    border-color: rgba(34, 197, 94, 0.7);
+}
+
+.custom-cursor.cursor-medium .cursor-dot {
+    width: 14px;
+    height: 14px;
+    background: #3B82F6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.custom-cursor.cursor-medium .cursor-ring {
+    width: 45px;
+    height: 45px;
+    border-color: rgba(59, 130, 246, 0.6);
+}
+
+.custom-cursor.cursor-advanced .cursor-dot {
+    width: 10px;
+    height: 10px;
+    background: #8B5CF6;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+.custom-cursor.cursor-advanced .cursor-ring {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
 @keyframes cursorPulse {
 
     0%,
