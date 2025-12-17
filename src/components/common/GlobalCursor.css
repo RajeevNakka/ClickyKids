@@ -1,0 +1,80 @@
+/* Global Custom Cursor */
+.global-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+}
+
+.global-cursor .cursor-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.global-cursor .cursor-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: globalCursorPulse 1.5s ease-in-out infinite;
+}
+
+/* Easy - Large green cursor */
+.global-cursor.cursor-easy .cursor-dot {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #22C55E, #34D399);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.7);
+}
+
+.global-cursor.cursor-easy .cursor-ring {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(34, 197, 94, 0.6);
+}
+
+/* Medium - Blue cursor */
+.global-cursor.cursor-medium .cursor-dot {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+    box-shadow: 0 0 18px rgba(59, 130, 246, 0.6);
+}
+
+.global-cursor.cursor-medium .cursor-ring {
+    width: 45px;
+    height: 45px;
+    border: 3px solid rgba(59, 130, 246, 0.5);
+}
+
+/* Advanced - Small purple cursor */
+.global-cursor.cursor-advanced .cursor-dot {
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+}
+
+.global-cursor.cursor-advanced .cursor-ring {
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(139, 92, 246, 0.4);
+}
+
+@keyframes globalCursorPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 0.4;
+    }
+}

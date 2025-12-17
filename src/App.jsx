@@ -15,6 +15,7 @@ import ParentDashboard from './pages/ParentDashboard';
 // Components
 import NavBar from './components/common/NavBar';
 import LanguageSwitcher from './components/common/LanguageSwitcher';
+import GlobalCursor from './components/common/GlobalCursor';
 
 function App() {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <div className="app">
+      <GlobalCursor />
       <NavBar
         isFullscreen={isFullscreen}
         onToggleFullscreen={toggleFullscreen}
