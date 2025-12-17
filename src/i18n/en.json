@@ -1,0 +1,100 @@
+{
+    "app": {
+        "name": "ClickyKids",
+        "tagline": "Learn to use computers with fun!"
+    },
+    "nav": {
+        "home": "Home",
+        "mouse": "Mouse",
+        "keyboard": "Keyboard",
+        "games": "Games",
+        "parent": "Parents",
+        "settings": "Settings",
+        "back": "Back"
+    },
+    "home": {
+        "welcome": "Welcome!",
+        "chooseActivity": "Choose an activity",
+        "learnMouse": "Learn Mouse",
+        "learnKeyboard": "Learn Keyboard",
+        "playGames": "Play Games"
+    },
+    "mouse": {
+        "title": "Mouse Learning",
+        "explore": "Explore Mode",
+        "exploreDesc": "Move and click the mouse to see what happens!",
+        "movement": "Movement Games",
+        "clicking": "Clicking Games",
+        "dragDrop": "Drag & Drop",
+        "instructions": {
+            "move": "Move your mouse around!",
+            "leftClick": "Click the left button!",
+            "rightClick": "Click the right button!",
+            "scroll": "Roll the wheel!",
+            "drag": "Hold the button and move!"
+        }
+    },
+    "keyboard": {
+        "title": "Keyboard Learning",
+        "anyKey": "Press Any Key",
+        "anyKeyDesc": "Press any key to see magic!",
+        "findKey": "Find the Key",
+        "findKeyDesc": "Find and press the key shown",
+        "typing": "Typing Practice",
+        "typingDesc": "Type letters and words"
+    },
+    "games": {
+        "bubblePop": "Bubble Pop",
+        "bubblePopDesc": "Pop the bubbles!",
+        "feedAnimals": "Feed Animals",
+        "feedAnimalsDesc": "Click food to feed the animals!",
+        "shapes": "Shape Match",
+        "shapesDesc": "Match the shapes!",
+        "puzzle": "Puzzle Fun",
+        "puzzleDesc": "Put pieces together!",
+        "butterfly": "Follow Butterfly",
+        "butterflyDesc": "Follow the butterfly with your cursor!"
+    },
+    "profile": {
+        "title": "Who's Playing?",
+        "addNew": "Add New",
+        "name": "Name",
+        "age": "Age",
+        "years": "years",
+        "difficulty": "Difficulty",
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced"
+    },
+    "parent": {
+        "title": "Parent Dashboard",
+        "enterPin": "Enter PIN",
+        "progress": "Progress",
+        "timeSpent": "Time Spent",
+        "skillsLearned": "Skills Learned",
+        "accuracy": "Accuracy",
+        "streak": "Practice Streak",
+        "recommendations": "Recommendations",
+        "settings": "Settings",
+        "profiles": "Manage Profiles"
+    },
+    "feedback": {
+        "great": "Great job!",
+        "awesome": "Awesome!",
+        "wonderful": "Wonderful!",
+        "keepGoing": "Keep going!",
+        "youClicked": "You clicked!",
+        "goodMoving": "Good moving!",
+        "niceScroll": "Nice scroll!",
+        "perfectDrag": "Perfect drag!",
+        "tryAgain": "Try again!",
+        "wellDone": "Well done!"
+    },
+    "settings": {
+        "language": "Language",
+        "sound": "Sound",
+        "music": "Music",
+        "fullscreen": "Full Screen",
+        "parentPin": "Parent PIN"
+    }
+}

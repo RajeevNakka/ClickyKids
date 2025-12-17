@@ -1,0 +1,100 @@
+{
+    "app": {
+        "name": "क्लिकी किड्स",
+        "tagline": "कंप्यूटर सीखो मज़े के साथ!"
+    },
+    "nav": {
+        "home": "होम",
+        "mouse": "माउस",
+        "keyboard": "कीबोर्ड",
+        "games": "खेल",
+        "parent": "माता-पिता",
+        "settings": "सेटिंग्स",
+        "back": "वापस"
+    },
+    "home": {
+        "welcome": "स्वागत है!",
+        "chooseActivity": "एक गतिविधि चुनो",
+        "learnMouse": "माउस सीखो",
+        "learnKeyboard": "कीबोर्ड सीखो",
+        "playGames": "खेलो"
+    },
+    "mouse": {
+        "title": "माउस सीखना",
+        "explore": "खोज मोड",
+        "exploreDesc": "माउस हिलाओ और क्लिक करके देखो!",
+        "movement": "मूवमेंट गेम्स",
+        "clicking": "क्लिकिंग गेम्स",
+        "dragDrop": "ड्रैग और ड्रॉप",
+        "instructions": {
+            "move": "अपना माउस चारों तरफ हिलाओ!",
+            "leftClick": "बायाँ बटन क्लिक करो!",
+            "rightClick": "दायाँ बटन क्लिक करो!",
+            "scroll": "पहिया घुमाओ!",
+            "drag": "बटन दबाए रखो और हिलाओ!"
+        }
+    },
+    "keyboard": {
+        "title": "कीबोर्ड सीखना",
+        "anyKey": "कोई भी की दबाओ",
+        "anyKeyDesc": "कोई भी की दबाकर जादू देखो!",
+        "findKey": "की खोजो",
+        "findKeyDesc": "दिखाई गई की को खोजो और दबाओ",
+        "typing": "टाइपिंग प्रैक्टिस",
+        "typingDesc": "अक्षर और शब्द टाइप करो"
+    },
+    "games": {
+        "bubblePop": "बुलबुले फोड़ो",
+        "bubblePopDesc": "बुलबुले फोड़ो!",
+        "feedAnimals": "जानवरों को खिलाओ",
+        "feedAnimalsDesc": "जानवरों को खिलाने के लिए क्लिक करो!",
+        "shapes": "आकार मिलाओ",
+        "shapesDesc": "आकारों को मिलाओ!",
+        "puzzle": "पज़ल मज़ा",
+        "puzzleDesc": "टुकड़े जोड़ो!",
+        "butterfly": "तितली का पीछा",
+        "butterflyDesc": "कर्सर से तितली का पीछा करो!"
+    },
+    "profile": {
+        "title": "कौन खेल रहा है?",
+        "addNew": "नया जोड़ो",
+        "name": "नाम",
+        "age": "उम्र",
+        "years": "साल",
+        "difficulty": "कठिनाई",
+        "beginner": "शुरुआती",
+        "intermediate": "मध्यम",
+        "advanced": "उन्नत"
+    },
+    "parent": {
+        "title": "माता-पिता डैशबोर्ड",
+        "enterPin": "पिन डालें",
+        "progress": "प्रगति",
+        "timeSpent": "बिताया समय",
+        "skillsLearned": "सीखे कौशल",
+        "accuracy": "सटीकता",
+        "streak": "प्रैक्टिस स्ट्रीक",
+        "recommendations": "सुझाव",
+        "settings": "सेटिंग्स",
+        "profiles": "प्रोफ़ाइल प्रबंधित करें"
+    },
+    "feedback": {
+        "great": "बहुत अच्छा!",
+        "awesome": "शानदार!",
+        "wonderful": "अद्भुत!",
+        "keepGoing": "जारी रखो!",
+        "youClicked": "तुमने क्लिक किया!",
+        "goodMoving": "अच्छे से हिला रहे हो!",
+        "niceScroll": "अच्छा स्क्रॉल!",
+        "perfectDrag": "परफेक्ट ड्रैग!",
+        "tryAgain": "फिर से कोशिश करो!",
+        "wellDone": "शाबाश!"
+    },
+    "settings": {
+        "language": "भाषा",
+        "sound": "आवाज़",
+        "music": "संगीत",
+        "fullscreen": "फुल स्क्रीन",
+        "parentPin": "माता-पिता पिन"
+    }
+}

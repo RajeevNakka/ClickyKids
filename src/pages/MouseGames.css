@@ -1,0 +1,240 @@
+.games-page {
+    min-height: 100vh;
+    background: var(--gradient-candy);
+    padding: var(--spacing-xl);
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.games-title {
+    font-size: var(--font-size-4xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+    width: 100%;
+    max-width: 800px;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-2xl);
+    background: var(--card-bg, var(--gradient-primary));
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-lg);
+    min-height: 180px;
+}
+
+.game-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.game-icon {
+    font-size: 4rem;
+}
+
+.game-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Game Container */
+.game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: var(--z-modal);
+}
+
+.bubble-game {
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F7FF 100%);
+}
+
+.butterfly-game {
+    background: linear-gradient(180deg, #90EE90 0%, #F0FFF0 50%, #98FB98 100%);
+}
+
+.shape-game {
+    background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 50%, #F0FFFF 100%);
+}
+
+.exit-game-btn {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 60px;
+    height: 60px;
+    font-size: var(--font-size-2xl);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    z-index: var(--z-tooltip);
+    box-shadow: var(--shadow-md);
+}
+
+.exit-game-btn:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.game-hud {
+    position: fixed;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    box-shadow: var(--shadow-md);
+    z-index: var(--z-fixed);
+}
+
+.game-instruction {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    z-index: var(--z-fixed);
+}
+
+/* Bubble Styles */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    box-shadow:
+        inset -10px -10px 30px rgba(255, 255, 255, 0.5),
+        inset 10px 10px 30px rgba(0, 0, 0, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bubble:hover {
+    transform: scale(1.1);
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 25%;
+    height: 20%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+}
+
+/* Butterfly Styles */
+.butterfly {
+    position: absolute;
+    font-size: 6rem;
+    cursor: default;
+    transition: all 0.8s ease-out;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+    animation: flutter 0.5s ease-in-out infinite;
+}
+
+.butterfly.caught {
+    animation: celebration 0.5s ease-out;
+    transform: scale(1.3);
+}
+
+@keyframes flutter {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+/* Shape Styles */
+.target-shape-display {
+    position: fixed;
+    top: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    z-index: var(--z-fixed);
+}
+
+.target-label {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+}
+
+.target-shape {
+    font-size: 3rem;
+}
+
+.clickable-shape {
+    position: absolute;
+    font-size: 4rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.clickable-shape:hover {
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .games-title {
+        font-size: var(--font-size-3xl);
+    }
+
+    .game-card {
+        padding: var(--spacing-xl);
+        min-height: 150px;
+    }
+
+    .game-icon {
+        font-size: 3rem;
+    }
+
+    .butterfly {
+        font-size: 4rem;
+    }
+
+    .clickable-shape {
+        font-size: 3rem;
+    }
+}

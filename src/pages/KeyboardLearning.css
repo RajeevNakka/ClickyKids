@@ -1,0 +1,311 @@
+.keyboard-page {
+    min-height: 100vh;
+    background: var(--gradient-forest);
+    padding: var(--spacing-xl);
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.keyboard-title {
+    font-size: var(--font-size-4xl);
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    width: 100%;
+    max-width: 900px;
+}
+
+.exercise-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-2xl);
+    background: var(--card-bg, white);
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-lg);
+}
+
+.exercise-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.exercise-icon {
+    font-size: 4rem;
+}
+
+.exercise-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.exercise-desc {
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+/* Any Key Game */
+.anykey-game {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 50%, #4ECDC4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.anykey-display {
+    text-align: center;
+}
+
+.key-visual {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: 5rem;
+    box-shadow:
+        0 10px 0 #D1D5DB,
+        var(--shadow-xl);
+    transition: all 0.1s ease;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.key-visual.pressed {
+    transform: translateY(5px);
+    box-shadow:
+        0 5px 0 #D1D5DB,
+        var(--shadow-lg);
+    background: var(--gradient-candy);
+}
+
+.anykey-instruction {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: var(--z-tooltip);
+}
+
+.celebration-star {
+    position: absolute;
+    font-size: 3rem;
+    animation: starBurst 1s ease-out forwards;
+}
+
+@keyframes starBurst {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5) rotate(180deg) translateY(-100px);
+        opacity: 0;
+    }
+}
+
+/* Find Key Game */
+.findkey-game {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.findkey-display {
+    text-align: center;
+    position: relative;
+}
+
+.findkey-prompt {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--spacing-xl);
+}
+
+.target-key {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: 6rem;
+    margin: 0 auto;
+    box-shadow:
+        0 10px 0 #9CA3AF,
+        var(--shadow-xl);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.target-key.success {
+    background: var(--gradient-forest);
+    color: white;
+    animation: celebration 0.5s ease-out;
+}
+
+.success-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    background: white;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-3xl);
+    box-shadow: var(--shadow-xl);
+    z-index: 10;
+}
+
+/* Typing Game */
+.typing-game {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typing-display {
+    text-align: center;
+    max-width: 600px;
+}
+
+.typing-prompt {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--spacing-lg);
+}
+
+.target-word {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.target-char {
+    width: 60px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: var(--radius-lg);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-3xl);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+}
+
+.target-char.correct {
+    background: var(--color-success);
+    color: white;
+}
+
+.target-char.wrong {
+    background: var(--color-error);
+    color: white;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.typed-text {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-4xl);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: var(--spacing-xl);
+    min-height: 60px;
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.complete-message {
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    background: white;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    color: var(--color-success);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+    .keyboard-title {
+        font-size: var(--font-size-3xl);
+    }
+
+    .key-visual,
+    .target-key {
+        width: 150px;
+        height: 150px;
+        font-size: 4rem;
+    }
+
+    .target-char {
+        width: 45px;
+        height: 55px;
+        font-size: var(--font-size-2xl);
+    }
+}
