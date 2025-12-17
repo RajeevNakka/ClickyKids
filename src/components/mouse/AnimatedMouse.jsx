@@ -4,7 +4,7 @@ import './AnimatedMouse.css';
 
 /**
  * Large animated mouse that mirrors real mouse actions
- * - Position follows cursor
+ * - Tilts and moves based on mouse movement direction
  * - Left click shows green feedback
  * - Right click shows blue feedback
  * - Scroll animates the wheel
@@ -14,6 +14,50 @@ function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }
     const [wheelRotation, setWheelRotation] = useState(0);
     const [showLeftFeedback, setShowLeftFeedback] = useState(false);
     const [showRightFeedback, setShowRightFeedback] = useState(false);
+
+    // Movement tracking for tilt effect
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+    const [offset, setOffset] = useState({ x: 0, y: 0 });
+    const [isMoving, setIsMoving] = useState(false);
+    const lastPos = useRef({ x: 0, y: 0 });
+    const moveTimeout = useRef(null);
+
+    // Track mouse movement and calculate tilt
+    useEffect(() => {
+        const dx = x - lastPos.current.x;
+        const dy = y - lastPos.current.y;
+
+        // Calculate movement velocity
+        const speed = Math.sqrt(dx * dx + dy * dy);
+
+        if (speed > 2) {
+            setIsMoving(true);
+
+            // Tilt the mouse based on movement direction (max 15 degrees)
+            const tiltX = Math.max(-15, Math.min(15, dx * 0.5));
+            const tiltY = Math.max(-15, Math.min(15, dy * 0.3));
+            setTilt({ x: tiltX, y: tiltY });
+
+            // Move the mouse slightly in movement direction (max 30px)
+            const offsetX = Math.max(-30, Math.min(30, dx * 0.8));
+            const offsetY = Math.max(-30, Math.min(30, dy * 0.8));
+            setOffset({ x: offsetX, y: offsetY });
+
+            // Clear previous timeout
+            if (moveTimeout.current) {
+                clearTimeout(moveTimeout.current);
+            }
+
+            // Reset tilt after movement stops
+            moveTimeout.current = setTimeout(() => {
+                setTilt({ x: 0, y: 0 });
+                setOffset({ x: 0, y: 0 });
+                setIsMoving(false);
+            }, 150);
+        }
+
+        lastPos.current = { x, y };
+    }, [x, y]);
 
     // Animate wheel on scroll
     useEffect(() => {
@@ -27,7 +71,6 @@ function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }
         if (leftClick) {
             setShowLeftFeedback(true);
         } else {
-            // Keep feedback visible briefly after release
             const timer = setTimeout(() => setShowLeftFeedback(false), 150);
             return () => clearTimeout(timer);
         }
@@ -43,11 +86,22 @@ function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }
         }
     }, [rightClick]);
 
+    // Calculate transform for tilt and offset
+    const mouseTransform = `
+        translateX(${offset.x}px) 
+        translateY(${offset.y}px) 
+        rotateY(${tilt.x}deg) 
+        rotateX(${-tilt.y}deg)
+    `;
+
     return (
         <>
-            {/* The animated mouse follows cursor but stays centered-ish on screen */}
+            {/* The animated mouse with movement-based tilt */}
             <div className="animated-mouse-container">
-                <div className="animated-mouse">
+                <div
+                    className={`animated-mouse ${isMoving ? 'moving' : ''}`}
+                    style={{ transform: mouseTransform }}
+                >
                     {/* Mouse body */}
                     <svg viewBox="0 0 200 320" className="mouse-svg">
                         {/* Mouse body outline */}
@@ -115,6 +169,13 @@ function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }
                     </svg>
                 </div>
 
+                {/* Movement direction indicator */}
+                {isMoving && (
+                    <div className="movement-indicator animate-pop">
+                        {t('feedback.goodMoving')} 🎯
+                    </div>
+                )}
+
                 {/* Action feedback text */}
                 {showLeftFeedback && (
                     <div className="click-feedback left animate-pop">
@@ -146,3 +207,4 @@ function AnimatedMouse({ x, y, leftClick, rightClick, isScrolling, scrollDelta }
 }
 
 export default AnimatedMouse;
+

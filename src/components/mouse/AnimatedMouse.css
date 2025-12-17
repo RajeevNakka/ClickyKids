@@ -5,6 +5,7 @@
     transform: translate(-50%, -50%);
     z-index: 10;
     pointer-events: none;
+    perspective: 1000px;
 }
 
 .animated-mouse {
@@ -12,6 +13,29 @@
     height: 320px;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
     animation: float 3s ease-in-out infinite;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+}
+
+.animated-mouse.moving {
+    animation: none;
+    filter: drop-shadow(0 15px 40px rgba(99, 102, 241, 0.4));
+}
+
+/* Movement indicator */
+.movement-indicator {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    color: white;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-lg);
+    white-space: nowrap;
+    box-shadow: var(--shadow-lg);
 }
 
 .mouse-svg {
