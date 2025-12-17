@@ -71,6 +71,12 @@ function BubblePopGame({ navigate, t, backPath }) {
     const [score, setScore] = useState(0);
     const gameRef = useRef(null);
 
+    const handleExit = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        navigate(backPath, { replace: true });
+    };
+
     const difficulty = getActiveDifficultySettings();
     const bubbleSize = difficulty.targetSize === 'large' ? 120 : difficulty.targetSize === 'medium' ? 90 : 60;
 
@@ -119,7 +125,7 @@ function BubblePopGame({ navigate, t, backPath }) {
 
     return (
         <div className="game-container bubble-game" ref={gameRef}>
-            <button className="exit-game-btn" onClick={() => navigate(backPath)}>✕</button>
+            <button className="exit-game-btn" onClick={handleExit}>✕</button>
 
             <div className="game-hud">
                 <span className="score">🫧 {popped}</span>
@@ -154,6 +160,12 @@ function ButterflyGame({ navigate, t, backPath }) {
     const [butterflyPos, setButterflyPos] = useState({ x: 200, y: 200 });
     const [cursorNear, setCursorNear] = useState(false);
     const [catches, setCatches] = useState(0);
+
+    const handleExit = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        navigate(backPath, { replace: true });
+    };
 
     useEffect(() => {
         startSession('mouseMovement');
@@ -199,7 +211,7 @@ function ButterflyGame({ navigate, t, backPath }) {
 
     return (
         <div className="game-container butterfly-game" onMouseMove={handleMouseMove}>
-            <button className="exit-game-btn" onClick={() => navigate(backPath)}>✕</button>
+            <button className="exit-game-btn" onClick={handleExit}>✕</button>
 
             <div className="game-hud">
                 <span className="score">🦋 {catches}</span>
@@ -228,6 +240,12 @@ function ShapeMatchGame({ navigate, t, backPath }) {
     const [displayShapes, setDisplayShapes] = useState([]);
     const [matched, setMatched] = useState(0);
     const [isInitialized, setIsInitialized] = useState(false);
+
+    const handleExit = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        navigate(backPath, { replace: true });
+    };
 
     // Memoize generateNewRound to prevent re-creation
     const generateNewRound = useCallback(() => {
@@ -272,7 +290,7 @@ function ShapeMatchGame({ navigate, t, backPath }) {
 
     return (
         <div className="game-container shape-game">
-            <button className="exit-game-btn" onClick={() => navigate(backPath)}>✕</button>
+            <button className="exit-game-btn" onClick={handleExit}>✕</button>
 
             <div className="game-hud">
                 <span className="score">✓ {matched}</span>
