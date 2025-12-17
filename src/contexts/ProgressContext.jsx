@@ -1,10 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useProfile } from './ProfileContext';
 
 const ProgressContext = createContext(null);
 
 const defaultProgress = {
-    // Time tracking (in seconds)
     timeSpent: {
         mouseMovement: 0,
         mouseClicking: 0,
@@ -12,7 +11,6 @@ const defaultProgress = {
         keyboardBasic: 0,
         keyboardTyping: 0
     },
-    // Exercise completion counts
     exercisesCompleted: {
         mouseExplore: 0,
         bubblePop: 0,
@@ -24,19 +22,16 @@ const defaultProgress = {
         findKey: 0,
         typing: 0
     },
-    // Accuracy tracking (percentage values)
     accuracy: {
         clicking: [],
         dragDrop: [],
         keyboard: []
     },
-    // Streak tracking
     streak: {
         current: 0,
         longest: 0,
         lastPracticeDate: null
     },
-    // Session history
     sessions: []
 };
 
@@ -49,8 +44,8 @@ export function ProgressProvider({ children }) {
         return saved ? JSON.parse(saved) : defaultProgress;
     });
 
-    const [sessionStart, setSessionStart] = useState(null);
-    const [currentSkill, setCurrentSkill] = useState(null);
+    const sessionStartRef = useRef(null);
+    const currentSkillRef = useRef(null);
 
     // Load progress when profile changes
     useEffect(() => {
@@ -69,69 +64,68 @@ export function ProgressProvider({ children }) {
         }
     }, [progress, activeProfileId]);
 
-    // Check and update streak
-    const updateStreak = () => {
+    // Start tracking a skill session - memoized
+    const startSession = useCallback((skill) => {
+        sessionStartRef.current = Date.now();
+        currentSkillRef.current = skill;
+
+        // Update streak
         const today = new Date().toDateString();
-        const lastPractice = progress.streak.lastPracticeDate;
+        setProgress(prev => {
+            if (prev.streak.lastPracticeDate === today) {
+                return prev; // Already practiced today
+            }
 
-        if (lastPractice === today) {
-            return; // Already practiced today
-        }
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
 
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
+            if (prev.streak.lastPracticeDate === yesterday.toDateString()) {
+                return {
+                    ...prev,
+                    streak: {
+                        current: prev.streak.current + 1,
+                        longest: Math.max(prev.streak.longest, prev.streak.current + 1),
+                        lastPracticeDate: today
+                    }
+                };
+            } else {
+                return {
+                    ...prev,
+                    streak: {
+                        current: 1,
+                        longest: Math.max(prev.streak.longest, 1),
+                        lastPracticeDate: today
+                    }
+                };
+            }
+        });
+    }, []);
 
-        if (lastPractice === yesterday.toDateString()) {
-            // Continuing streak
-            setProgress(prev => ({
-                ...prev,
-                streak: {
-                    current: prev.streak.current + 1,
-                    longest: Math.max(prev.streak.longest, prev.streak.current + 1),
-                    lastPracticeDate: today
-                }
-            }));
-        } else {
-            // Streak broken or first time
-            setProgress(prev => ({
-                ...prev,
-                streak: {
-                    current: 1,
-                    longest: Math.max(prev.streak.longest, 1),
-                    lastPracticeDate: today
-                }
-            }));
-        }
-    };
-
-    // Start tracking a skill session
-    const startSession = (skill) => {
-        setSessionStart(Date.now());
-        setCurrentSkill(skill);
-        updateStreak();
-    };
-
-    // End tracking a skill session
-    const endSession = () => {
-        if (sessionStart && currentSkill) {
-            const duration = Math.round((Date.now() - sessionStart) / 1000);
-            addTimeSpent(currentSkill, duration);
+    // End tracking a skill session - memoized
+    const endSession = useCallback(() => {
+        if (sessionStartRef.current && currentSkillRef.current) {
+            const duration = Math.round((Date.now() - sessionStartRef.current) / 1000);
+            const skill = currentSkillRef.current;
 
             setProgress(prev => ({
                 ...prev,
+                timeSpent: {
+                    ...prev.timeSpent,
+                    [skill]: (prev.timeSpent[skill] || 0) + duration
+                },
                 sessions: [...prev.sessions, {
-                    skill: currentSkill,
+                    skill,
                     duration,
                     date: new Date().toISOString()
-                }].slice(-100) // Keep last 100 sessions
+                }].slice(-100)
             }));
         }
-        setSessionStart(null);
-        setCurrentSkill(null);
-    };
+        sessionStartRef.current = null;
+        currentSkillRef.current = null;
+    }, []);
 
-    // Add time spent on a skill
-    const addTimeSpent = (skill, seconds) => {
+    // Add time spent on a skill - memoized
+    const addTimeSpent = useCallback((skill, seconds) => {
         setProgress(prev => ({
             ...prev,
             timeSpent: {
@@ -139,10 +133,10 @@ export function ProgressProvider({ children }) {
                 [skill]: (prev.timeSpent[skill] || 0) + seconds
             }
         }));
-    };
+    }, []);
 
-    // Increment exercise completion count
-    const completeExercise = (exerciseName) => {
+    // Complete exercise - memoized
+    const completeExercise = useCallback((exerciseName) => {
         setProgress(prev => ({
             ...prev,
             exercisesCompleted: {
@@ -150,10 +144,10 @@ export function ProgressProvider({ children }) {
                 [exerciseName]: (prev.exercisesCompleted[exerciseName] || 0) + 1
             }
         }));
-    };
+    }, []);
 
-    // Record accuracy for an exercise
-    const recordAccuracy = (category, accuracyPercent) => {
+    // Record accuracy - memoized
+    const recordAccuracy = useCallback((category, accuracyPercent) => {
         setProgress(prev => ({
             ...prev,
             accuracy: {
@@ -161,31 +155,30 @@ export function ProgressProvider({ children }) {
                 [category]: [...(prev.accuracy[category] || []), accuracyPercent].slice(-50)
             }
         }));
-    };
+    }, []);
 
-    // Get average accuracy for a category
-    const getAverageAccuracy = (category) => {
+    // Get average accuracy
+    const getAverageAccuracy = useCallback((category) => {
         const values = progress.accuracy[category] || [];
         if (values.length === 0) return 0;
         return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
-    };
+    }, [progress.accuracy]);
 
-    // Get total time spent across all skills
-    const getTotalTimeSpent = () => {
+    // Get total time spent
+    const getTotalTimeSpent = useCallback(() => {
         return Object.values(progress.timeSpent).reduce((a, b) => a + b, 0);
-    };
+    }, [progress.timeSpent]);
 
-    // Get total exercises completed
-    const getTotalExercises = () => {
+    // Get total exercises
+    const getTotalExercises = useCallback(() => {
         return Object.values(progress.exercisesCompleted).reduce((a, b) => a + b, 0);
-    };
+    }, [progress.exercisesCompleted]);
 
-    // Get skill readiness recommendations
-    const getRecommendations = () => {
+    // Get recommendations
+    const getRecommendations = useCallback(() => {
         const recommendations = [];
-        const { timeSpent, exercisesCompleted, accuracy } = progress;
+        const { timeSpent, exercisesCompleted } = progress;
 
-        // Mouse movement → Clicking readiness
         if (timeSpent.mouseMovement > 300 && !exercisesCompleted.bubblePop) {
             recommendations.push({
                 type: 'ready',
@@ -194,7 +187,6 @@ export function ProgressProvider({ children }) {
             });
         }
 
-        // Clicking → Drag and Drop readiness
         if (exercisesCompleted.bubblePop > 5 && getAverageAccuracy('clicking') > 60) {
             if (!exercisesCompleted.puzzle) {
                 recommendations.push({
@@ -205,8 +197,8 @@ export function ProgressProvider({ children }) {
             }
         }
 
-        // Mouse → Keyboard readiness
-        if (getTotalTimeSpent() > 600 && (!timeSpent.keyboardBasic || timeSpent.keyboardBasic < 60)) {
+        const totalTime = Object.values(timeSpent).reduce((a, b) => a + b, 0);
+        if (totalTime > 600 && (!timeSpent.keyboardBasic || timeSpent.keyboardBasic < 60)) {
             recommendations.push({
                 type: 'ready',
                 message: 'Try keyboard learning!',
@@ -214,8 +206,7 @@ export function ProgressProvider({ children }) {
             });
         }
 
-        // Practice reminders
-        if (progress.streak.current === 0 && getTotalTimeSpent() > 0) {
+        if (progress.streak.current === 0 && totalTime > 0) {
             recommendations.push({
                 type: 'reminder',
                 message: 'Come back to practice!',
@@ -224,12 +215,12 @@ export function ProgressProvider({ children }) {
         }
 
         return recommendations;
-    };
+    }, [progress, getAverageAccuracy]);
 
-    // Reset progress (for testing or parent request)
-    const resetProgress = () => {
+    // Reset progress
+    const resetProgress = useCallback(() => {
         setProgress(defaultProgress);
-    };
+    }, []);
 
     const value = {
         progress,
@@ -261,3 +252,4 @@ export function useProgress() {
 }
 
 export default ProgressContext;
+
