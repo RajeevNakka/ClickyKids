@@ -21,7 +21,7 @@ const categories = {
     },
     fruits: {
         icon: '🍎',
-        background: 'kitchen',
+        background: 'market',
         items: [
             { id: 'apple', emoji: '🍎', name: 'Apple', sound: 'crunchy' },
             { id: 'banana', emoji: '🍌', name: 'Banana', sound: 'sweet' },
