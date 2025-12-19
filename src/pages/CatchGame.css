@@ -13,6 +13,7 @@
 .catch-page.playing {
     padding: 0;
     cursor: none;
+    overflow: hidden;
 }
 
 .catch-title {

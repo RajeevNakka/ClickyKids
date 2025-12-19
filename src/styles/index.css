@@ -108,8 +108,6 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  overflow: hidden;
-  height: 100%;
 }
 
 body {
@@ -117,18 +115,17 @@ body {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   line-height: 1.6;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: none;
 }
 
 #root {
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 /* === Typography === */
