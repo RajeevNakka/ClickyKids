@@ -1,0 +1,195 @@
+.memory-page {
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+}
+
+.memory-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-4xl);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--spacing-md);
+}
+
+.memory-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-2xl);
+}
+
+/* Set Selection */
+.set-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 700px;
+    width: 100%;
+}
+
+.set-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-2xl);
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid transparent;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-lg);
+}
+
+.set-card:hover {
+    transform: scale(1.05);
+    border-color: var(--color-primary);
+}
+
+.set-preview {
+    font-size: 2.5rem;
+}
+
+.set-name {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+}
+
+/* Game HUD */
+.memory-hud {
+    display: flex;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Memory Card */
+.memory-card {
+    aspect-ratio: 1;
+    perspective: 1000px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.card-front {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.card-back {
+    background: white;
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched .card-back {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.memory-card:hover:not(.flipped):not(.matched) .card-inner {
+    transform: scale(1.05);
+}
+
+/* Complete Overlay */
+.complete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.complete-content {
+    background: white;
+    padding: var(--spacing-3xl);
+    border-radius: var(--radius-2xl);
+    text-align: center;
+}
+
+.complete-emoji {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: var(--spacing-lg);
+}
+
+.complete-content h2 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.complete-content p {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card-front,
+    .card-back {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .card-front,
+    .card-back {
+        font-size: 2rem;
+    }
+}

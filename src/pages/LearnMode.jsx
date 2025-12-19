@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAudio } from '../hooks/useAudio';
@@ -31,30 +31,6 @@ const categories = {
             { id: 'watermelon', emoji: '🍉', name: 'Watermelon', sound: 'refreshing' },
         ]
     }
-};
-
-// Generate random positions for items within scene zones
-const generatePositions = (category, itemCount) => {
-    const positions = [];
-
-    if (category === 'animals') {
-        // Animals: scattered across grass area (bottom 15-35%)
-        for (let i = 0; i < itemCount; i++) {
-            positions.push({
-                left: `${10 + (i * 80 / itemCount) + Math.random() * 8}%`,
-                bottom: `${15 + Math.random() * 20}%`,
-            });
-        }
-    } else {
-        // Fruits: on kitchen counter (25-32% from bottom)
-        for (let i = 0; i < itemCount; i++) {
-            positions.push({
-                left: `${15 + (i * 70 / itemCount) + Math.random() * 5}%`,
-                bottom: `${26 + Math.random() * 5}%`,
-            });
-        }
-    }
-    return positions;
 };
 
 function LearnMode() {
@@ -122,9 +98,6 @@ function ExploreMode({ category, onBack, t }) {
     const { startSession, endSession } = useProgress();
     const cat = categories[category];
 
-    // Generate random positions once on mount
-    const positions = useMemo(() => generatePositions(category, cat.items.length), [category, cat.items.length]);
-
     useEffect(() => {
         startSession('explore');
         return () => endSession();
@@ -143,16 +116,12 @@ function ExploreMode({ category, onBack, t }) {
         <div className={`learn-page bg-${cat.background}`}>
             <button className="back-btn" onClick={onBack}>← Back</button>
             <h2 className="explore-title">🔍 Tap to learn!</h2>
-            <div className="items-scene">
+            <div className="items-grid">
                 {cat.items.map((item, i) => (
                     <button
                         key={item.id}
                         className="learn-item animate-pop"
-                        style={{
-                            left: positions[i].left,
-                            bottom: positions[i].bottom,
-                            animationDelay: `${i * 0.1}s`
-                        }}
+                        style={{ animationDelay: `${i * 0.1}s` }}
                         onClick={() => handleItemClick(item)}
                     >
                         <span className="item-emoji">{item.emoji}</span>
@@ -171,9 +140,6 @@ function PlayMode({ category, onBack, t }) {
     const [target, setTarget] = useState(null);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(null);
-
-    // Generate random positions once on mount
-    const positions = useMemo(() => generatePositions(category, cat.items.length), [category, cat.items.length]);
 
     useEffect(() => {
         startSession('play');
@@ -220,16 +186,12 @@ function PlayMode({ category, onBack, t }) {
             <h2 className="play-title">
                 {target ? `Find the ${target.name}!` : 'Loading...'}
             </h2>
-            <div className="items-scene">
+            <div className="items-grid">
                 {cat.items.map((item, i) => (
                     <button
                         key={item.id}
                         className={`learn-item animate-pop ${showResult && item.id === target?.id ? 'highlight' : ''}`}
-                        style={{
-                            left: positions[i].left,
-                            bottom: positions[i].bottom,
-                            animationDelay: `${i * 0.1}s`
-                        }}
+                        style={{ animationDelay: `${i * 0.1}s` }}
                         onClick={() => handleItemClick(item)}
                     >
                         <span className="item-emoji">{item.emoji}</span>
@@ -244,4 +206,3 @@ function PlayMode({ category, onBack, t }) {
 }
 
 export default LearnMode;
-

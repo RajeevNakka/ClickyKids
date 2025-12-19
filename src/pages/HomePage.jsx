@@ -43,6 +43,20 @@ function HomePage() {
             path: '/learn'
         },
         {
+            id: 'memory',
+            icon: '🧠',
+            title: 'Memory Match',
+            gradient: 'var(--gradient-primary)',
+            path: '/memory'
+        },
+        {
+            id: 'bubbles',
+            icon: '🎈',
+            title: 'Pop Bubbles',
+            gradient: 'var(--gradient-sunrise)',
+            path: '/bubbles'
+        },
+        {
             id: 'games',
             icon: '🎮',
             title: t('home.playGames'),

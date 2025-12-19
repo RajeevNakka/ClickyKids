@@ -10,6 +10,8 @@ import MouseLearningMode from './pages/MouseLearningMode';
 import MouseGames from './pages/MouseGames';
 import KeyboardLearning from './pages/KeyboardLearning';
 import LearnMode from './pages/LearnMode';
+import MemoryMatch from './pages/MemoryMatch';
+import PopBubbles from './pages/PopBubbles';
 import ParentDashboard from './pages/ParentDashboard';
 
 // Components
@@ -74,6 +76,10 @@ function App() {
 
           {/* Learn Mode */}
           <Route path="/learn" element={<LearnMode />} />
+
+          {/* Games */}
+          <Route path="/memory" element={<MemoryMatch />} />
+          <Route path="/bubbles" element={<PopBubbles />} />
 
           {/* Parent Dashboard */}
           <Route path="/parent" element={<ParentDashboard />} />
