@@ -62,7 +62,7 @@ function CatchGame() {
             const newItem = {
                 id: itemIdRef.current++,
                 emoji,
-                x: 10 + Math.random() * 80,
+                x: 5 + Math.random() * 90, // Full width spawn
                 y: -10,
                 speed: 1 + Math.random() * 1.5,
             };
