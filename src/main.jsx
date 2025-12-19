@@ -4,17 +4,23 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { ProfileProvider } from './contexts/ProfileContext';
 import { ProgressProvider } from './contexts/ProgressContext';
+import { RewardsProvider } from './contexts/RewardsContext';
+import { SettingsProvider } from './contexts/SettingsContext';
 import './i18n';
 import './styles/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename="/ClickyKids">
-      <ProfileProvider>
-        <ProgressProvider>
-          <App />
-        </ProgressProvider>
-      </ProfileProvider>
+      <SettingsProvider>
+        <ProfileProvider>
+          <ProgressProvider>
+            <RewardsProvider>
+              <App />
+            </RewardsProvider>
+          </ProgressProvider>
+        </ProfileProvider>
+      </SettingsProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

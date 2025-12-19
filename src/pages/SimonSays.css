@@ -1,0 +1,134 @@
+.simon-page {
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.simon-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-4xl);
+    color: white;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    margin-bottom: var(--spacing-xl);
+}
+
+.simon-hud {
+    display: flex;
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    color: white;
+}
+
+/* Simon Board - 2x2 grid */
+.simon-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.simon-btn {
+    width: 140px;
+    height: 140px;
+    border: none;
+    border-radius: var(--radius-xl);
+    background: var(--btn-color);
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.simon-btn:hover:not(:disabled) {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.simon-btn.active {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 40px var(--btn-color), 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.simon-btn:disabled {
+    cursor: not-allowed;
+}
+
+/* Colors */
+.simon-btn.red {
+    border-radius: var(--radius-xl) 0 0 0;
+}
+
+.simon-btn.blue {
+    border-radius: 0 var(--radius-xl) 0 0;
+}
+
+.simon-btn.green {
+    border-radius: 0 0 0 var(--radius-xl);
+}
+
+.simon-btn.yellow {
+    border-radius: 0 0 var(--radius-xl) 0;
+}
+
+.start-btn {
+    font-size: var(--font-size-xl);
+    padding: var(--spacing-lg) var(--spacing-3xl);
+}
+
+.simon-message {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-xl);
+    margin-top: var(--spacing-lg);
+}
+
+/* Game Over Panel */
+.game-over-panel {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+}
+
+.game-over-panel h2 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.game-over-panel p {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.new-record {
+    color: var(--color-warning);
+    font-family: var(--font-family-display);
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .simon-btn {
+        width: 110px;
+        height: 110px;
+    }
+}

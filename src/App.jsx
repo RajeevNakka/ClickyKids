@@ -18,6 +18,10 @@ import ColorClick from './pages/ColorClick';
 import ConnectDots from './pages/ConnectDots';
 import MusicKeyboard from './pages/MusicKeyboard';
 import CatchGame from './pages/CatchGame';
+import SimonSays from './pages/SimonSays';
+import NumberLine from './pages/NumberLine';
+import ABCMode from './pages/ABCMode';
+import BadgesPage from './pages/BadgesPage';
 import ProgressDashboard from './pages/ProgressDashboard';
 import ParentDashboard from './pages/ParentDashboard';
 
@@ -92,6 +96,12 @@ function App() {
           <Route path="/connectdots" element={<ConnectDots />} />
           <Route path="/music" element={<MusicKeyboard />} />
           <Route path="/catch" element={<CatchGame />} />
+          <Route path="/simon" element={<SimonSays />} />
+          <Route path="/numberline" element={<NumberLine />} />
+          <Route path="/abc" element={<ABCMode />} />
+
+          {/* Rewards */}
+          <Route path="/badges" element={<BadgesPage />} />
 
           {/* Settings */}
           <Route path="/settings" element={<Settings />} />
