@@ -22,6 +22,8 @@ import SimonSays from './pages/SimonSays';
 import NumberLine from './pages/NumberLine';
 import ABCMode from './pages/ABCMode';
 import BadgesPage from './pages/BadgesPage';
+import StoryMode from './pages/StoryMode';
+import DailyChallenge from './pages/DailyChallenge';
 import ProgressDashboard from './pages/ProgressDashboard';
 import ParentDashboard from './pages/ParentDashboard';
 
@@ -99,6 +101,8 @@ function App() {
           <Route path="/simon" element={<SimonSays />} />
           <Route path="/numberline" element={<NumberLine />} />
           <Route path="/abc" element={<ABCMode />} />
+          <Route path="/story" element={<StoryMode />} />
+          <Route path="/daily" element={<DailyChallenge />} />
 
           {/* Rewards */}
           <Route path="/badges" element={<BadgesPage />} />

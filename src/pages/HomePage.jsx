@@ -21,9 +21,11 @@ function HomePage() {
     }, [activeProfile, speak, t]);
 
     const activities = [
+        { id: 'daily', icon: '🌟', title: 'Daily Challenge', gradient: 'linear-gradient(135deg, #667eea, #764ba2)', path: '/daily' },
         { id: 'mouse', icon: '🖱️', title: t('home.learnMouse'), gradient: 'var(--gradient-ocean)', path: '/mouse' },
         { id: 'keyboard', icon: '⌨️', title: t('home.learnKeyboard'), gradient: 'var(--gradient-forest)', path: '/keyboard' },
         { id: 'abc', icon: '🔤', title: 'ABC & 123', gradient: 'linear-gradient(135deg, #FF6B6B, #FFE66D)', path: '/abc' },
+        { id: 'story', icon: '📖', title: 'Story Time', gradient: 'linear-gradient(135deg, #FFF5E1, #FFE4C4)', path: '/story' },
         { id: 'learn', icon: '📚', title: 'Explore & Learn', gradient: 'var(--gradient-candy)', path: '/learn' },
         { id: 'memory', icon: '🧠', title: 'Memory Match', gradient: 'var(--gradient-primary)', path: '/memory' },
         { id: 'bubbles', icon: '🎈', title: 'Pop Bubbles', gradient: 'var(--gradient-sunrise)', path: '/bubbles' },

@@ -1,6 +1,16 @@
 import { useRef, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
+// Check if sound is enabled from localStorage (can't use context in this hook)
+const getSoundEnabled = () => {
+    try {
+        const settings = JSON.parse(localStorage.getItem('clickykids-settings') || '{}');
+        return settings.soundEnabled !== false; // Default to true
+    } catch {
+        return true;
+    }
+};
+
 // Audio file paths (will use Web Speech API initially)
 const audioFiles = {
     click: '/audio/click.mp3',
@@ -55,6 +65,8 @@ export function useAudio() {
 
     // Speak text using Web Speech API
     const speak = useCallback((text, options = {}) => {
+        if (!getSoundEnabled()) return; // Sound disabled
+
         if (!speechSynthRef.current) {
             console.warn('Speech synthesis not available');
             return;
@@ -84,6 +96,8 @@ export function useAudio() {
 
     // Play a sound effect
     const playSound = useCallback((soundName) => {
+        if (!getSoundEnabled()) return; // Sound disabled
+
         // For now, we'll use simple audio or create tones
         // In production, load actual audio files
         try {
