@@ -21,48 +21,17 @@ function HomePage() {
     }, [activeProfile, speak, t]);
 
     const activities = [
-        {
-            id: 'mouse',
-            icon: '🖱️',
-            title: t('home.learnMouse'),
-            gradient: 'var(--gradient-ocean)',
-            path: '/mouse'
-        },
-        {
-            id: 'keyboard',
-            icon: '⌨️',
-            title: t('home.learnKeyboard'),
-            gradient: 'var(--gradient-forest)',
-            path: '/keyboard'
-        },
-        {
-            id: 'learn',
-            icon: '📚',
-            title: 'Explore & Learn',
-            gradient: 'var(--gradient-candy)',
-            path: '/learn'
-        },
-        {
-            id: 'memory',
-            icon: '🧠',
-            title: 'Memory Match',
-            gradient: 'var(--gradient-primary)',
-            path: '/memory'
-        },
-        {
-            id: 'bubbles',
-            icon: '🎈',
-            title: 'Pop Bubbles',
-            gradient: 'var(--gradient-sunrise)',
-            path: '/bubbles'
-        },
-        {
-            id: 'games',
-            icon: '🎮',
-            title: t('home.playGames'),
-            gradient: 'var(--gradient-sunset)',
-            path: '/mouse/games'
-        }
+        { id: 'mouse', icon: '🖱️', title: t('home.learnMouse'), gradient: 'var(--gradient-ocean)', path: '/mouse' },
+        { id: 'keyboard', icon: '⌨️', title: t('home.learnKeyboard'), gradient: 'var(--gradient-forest)', path: '/keyboard' },
+        { id: 'learn', icon: '📚', title: 'Explore & Learn', gradient: 'var(--gradient-candy)', path: '/learn' },
+        { id: 'memory', icon: '🧠', title: 'Memory Match', gradient: 'var(--gradient-primary)', path: '/memory' },
+        { id: 'bubbles', icon: '🎈', title: 'Pop Bubbles', gradient: 'var(--gradient-sunrise)', path: '/bubbles' },
+        { id: 'dragdrop', icon: '🎯', title: 'Drag & Drop', gradient: 'linear-gradient(135deg, #11998e, #38ef7d)', path: '/dragdrop' },
+        { id: 'colorclick', icon: '🎨', title: 'Color by Click', gradient: 'linear-gradient(135deg, #ff9a9e, #fecfef)', path: '/colorclick' },
+        { id: 'connectdots', icon: '✨', title: 'Connect Dots', gradient: 'linear-gradient(135deg, #667eea, #764ba2)', path: '/connectdots' },
+        { id: 'music', icon: '🎹', title: 'Music Keyboard', gradient: 'linear-gradient(135deg, #2C3E50, #4CA1AF)', path: '/music' },
+        { id: 'catch', icon: '🧺', title: 'Catch Game', gradient: 'linear-gradient(135deg, #87CEEB, #98D8C8)', path: '/catch' },
+        { id: 'settings', icon: '⚙️', title: 'Settings', gradient: 'var(--gradient-sunset)', path: '/settings' },
     ];
 
     return (

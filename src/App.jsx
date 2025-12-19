@@ -12,6 +12,12 @@ import KeyboardLearning from './pages/KeyboardLearning';
 import LearnMode from './pages/LearnMode';
 import MemoryMatch from './pages/MemoryMatch';
 import PopBubbles from './pages/PopBubbles';
+import Settings from './pages/Settings';
+import DragDrop from './pages/DragDrop';
+import ColorClick from './pages/ColorClick';
+import ConnectDots from './pages/ConnectDots';
+import MusicKeyboard from './pages/MusicKeyboard';
+import CatchGame from './pages/CatchGame';
 import ParentDashboard from './pages/ParentDashboard';
 
 // Components
@@ -80,6 +86,14 @@ function App() {
           {/* Games */}
           <Route path="/memory" element={<MemoryMatch />} />
           <Route path="/bubbles" element={<PopBubbles />} />
+          <Route path="/dragdrop" element={<DragDrop />} />
+          <Route path="/colorclick" element={<ColorClick />} />
+          <Route path="/connectdots" element={<ConnectDots />} />
+          <Route path="/music" element={<MusicKeyboard />} />
+          <Route path="/catch" element={<CatchGame />} />
+
+          {/* Settings */}
+          <Route path="/settings" element={<Settings />} />
 
           {/* Parent Dashboard */}
           <Route path="/parent" element={<ParentDashboard />} />

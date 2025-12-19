@@ -1,0 +1,174 @@
+.connectdots-page {
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+}
+
+.connectdots-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-4xl);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--spacing-md);
+}
+
+.connectdots-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-2xl);
+}
+
+/* Pattern Selection */
+.pattern-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+    justify-content: center;
+}
+
+.pattern-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-2xl);
+    min-width: 140px;
+    background: white;
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-lg);
+}
+
+.pattern-option:hover {
+    transform: scale(1.05);
+}
+
+.pattern-preview {
+    font-size: 3rem;
+}
+
+.pattern-name {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-lg);
+}
+
+.pattern-dots {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* Game */
+.pattern-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Canvas */
+.canvas-container {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.dots-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Dots */
+.dot {
+    fill: #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dot.connected {
+    fill: #4ECDC4;
+}
+
+.dot.next {
+    fill: #FF6B6B;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.dot:hover {
+    transform: scale(1.5);
+}
+
+.dot-number {
+    font-size: 5px;
+    font-family: var(--font-family-display);
+    fill: #333;
+    pointer-events: none;
+}
+
+.connected-line {
+    animation: drawLine 0.3s ease-out;
+}
+
+@keyframes drawLine {
+    from {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+    }
+
+    to {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        r: 6;
+    }
+
+    50% {
+        r: 8;
+    }
+}
+
+/* Complete Banner */
+.complete-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: white;
+    border-radius: var(--radius-xl);
+    margin-top: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+}
+
+.complete-banner .complete-emoji {
+    font-size: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .canvas-container {
+        max-width: 300px;
+    }
+
+    .complete-banner {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

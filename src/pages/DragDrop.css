@@ -1,0 +1,227 @@
+.dragdrop-page {
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    position: relative;
+}
+
+.dragdrop-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-4xl);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--spacing-md);
+}
+
+.dragdrop-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-2xl);
+}
+
+/* Game Selection */
+.game-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+    justify-content: center;
+    max-width: 700px;
+}
+
+.game-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-2xl);
+    min-width: 180px;
+    background: white;
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-lg);
+}
+
+.game-option:hover {
+    transform: scale(1.05);
+}
+
+.game-preview {
+    font-size: 2rem;
+}
+
+.game-name {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-lg);
+}
+
+/* Game HUD */
+.dragdrop-hud {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+}
+
+.game-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Items Tray */
+.items-tray {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--spacing-2xl);
+    min-height: 100px;
+}
+
+.drag-item {
+    font-size: 3.5rem;
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-lg);
+    cursor: grab;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+    user-select: none;
+}
+
+.drag-item:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.drag-item:active {
+    cursor: grabbing;
+    transform: scale(1.15);
+}
+
+/* Drop Zones */
+.drop-zones {
+    display: flex;
+    gap: var(--spacing-2xl);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.drop-zone {
+    min-width: 180px;
+    min-height: 200px;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.9);
+    border: 4px dashed var(--zone-color);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.drop-zone:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.02);
+}
+
+.zone-label {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    color: var(--zone-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+.sorted-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.sorted-item {
+    font-size: 2.5rem;
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Complete Overlay */
+.complete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.complete-content {
+    background: white;
+    padding: var(--spacing-3xl);
+    border-radius: var(--radius-2xl);
+    text-align: center;
+}
+
+.complete-emoji {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: var(--spacing-lg);
+}
+
+.complete-content h2 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.complete-content p {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .drop-zones {
+        flex-direction: column;
+    }
+
+    .drop-zone {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .drag-item {
+        font-size: 2.5rem;
+    }
+}
