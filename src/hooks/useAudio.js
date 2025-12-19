@@ -87,8 +87,6 @@ export function useAudio() {
         // For now, we'll use simple audio or create tones
         // In production, load actual audio files
         try {
-            const audio = new Audio();
-
             // Create simple beep sounds for now
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (AudioContext) {
@@ -114,18 +112,37 @@ export function useAudio() {
                         setTimeout(() => oscillator.stop(), 150);
                         break;
                     case 'success':
+                    case 'match':
                         oscillator.frequency.value = 523; // C5
                         gainNode.gain.value = 0.3;
                         oscillator.start();
-                        setTimeout(() => {
-                            oscillator.frequency.value = 659; // E5
-                        }, 150);
-                        setTimeout(() => {
-                            oscillator.frequency.value = 784; // G5
-                        }, 300);
+                        setTimeout(() => { oscillator.frequency.value = 659; }, 150);
+                        setTimeout(() => { oscillator.frequency.value = 784; }, 300);
                         setTimeout(() => oscillator.stop(), 450);
                         break;
+                    case 'wrong':
+                        oscillator.frequency.value = 200;
+                        gainNode.gain.value = 0.2;
+                        oscillator.start();
+                        setTimeout(() => { oscillator.frequency.value = 150; }, 100);
+                        setTimeout(() => oscillator.stop(), 200);
+                        break;
+                    case 'catch':
+                        oscillator.frequency.value = 600;
+                        gainNode.gain.value = 0.25;
+                        oscillator.start();
+                        setTimeout(() => { oscillator.frequency.value = 900; }, 50);
+                        setTimeout(() => oscillator.stop(), 100);
+                        break;
+                    case 'drop':
+                        oscillator.frequency.value = 400;
+                        gainNode.gain.value = 0.2;
+                        oscillator.start();
+                        setTimeout(() => { oscillator.frequency.value = 200; }, 100);
+                        setTimeout(() => oscillator.stop(), 200);
+                        break;
                     case 'celebration':
+                    case 'complete':
                         // Play a happy jingle
                         oscillator.frequency.value = 523;
                         gainNode.gain.value = 0.3;

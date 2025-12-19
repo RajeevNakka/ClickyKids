@@ -18,6 +18,7 @@ import ColorClick from './pages/ColorClick';
 import ConnectDots from './pages/ConnectDots';
 import MusicKeyboard from './pages/MusicKeyboard';
 import CatchGame from './pages/CatchGame';
+import ProgressDashboard from './pages/ProgressDashboard';
 import ParentDashboard from './pages/ParentDashboard';
 
 // Components
@@ -94,6 +95,9 @@ function App() {
 
           {/* Settings */}
           <Route path="/settings" element={<Settings />} />
+
+          {/* Progress */}
+          <Route path="/progress" element={<ProgressDashboard />} />
 
           {/* Parent Dashboard */}
           <Route path="/parent" element={<ParentDashboard />} />

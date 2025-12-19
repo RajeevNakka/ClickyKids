@@ -53,7 +53,21 @@
         "puzzle": "Puzzle Fun",
         "puzzleDesc": "Put pieces together!",
         "butterfly": "Follow Butterfly",
-        "butterflyDesc": "Follow the butterfly with your cursor!"
+        "butterflyDesc": "Follow the butterfly with your cursor!",
+        "memoryMatch": "Memory Match",
+        "memoryMatchDesc": "Find matching pairs!",
+        "popBubbles": "Pop Bubbles",
+        "popBubblesDesc": "Pop floating bubbles!",
+        "dragDrop": "Drag & Drop",
+        "dragDropDesc": "Sort items into groups!",
+        "colorClick": "Color by Click",
+        "colorClickDesc": "Color the pictures!",
+        "connectDots": "Connect the Dots",
+        "connectDotsDesc": "Draw shapes by connecting dots!",
+        "musicKeyboard": "Music Keyboard",
+        "musicKeyboardDesc": "Play music on the piano!",
+        "catchGame": "Catch Game",
+        "catchGameDesc": "Catch falling items!"
     },
     "profile": {
         "title": "Who's Playing?",
@@ -88,7 +102,10 @@
         "niceScroll": "Nice scroll!",
         "perfectDrag": "Perfect drag!",
         "tryAgain": "Try again!",
-        "wellDone": "Well done!"
+        "wellDone": "Well done!",
+        "correct": "Correct!",
+        "match": "Match!",
+        "complete": "Complete!"
     },
     "settings": {
         "language": "Language",
@@ -96,5 +113,14 @@
         "music": "Music",
         "fullscreen": "Full Screen",
         "parentPin": "Parent PIN"
+    },
+    "progress": {
+        "title": "My Progress",
+        "timePlayed": "Time Played",
+        "gamesCompleted": "Games Completed",
+        "dayStreak": "Day Streak",
+        "bestStreak": "Best Streak",
+        "thisWeek": "This Week",
+        "gamesPlayed": "Games Played"
     }
 }

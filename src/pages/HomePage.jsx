@@ -31,6 +31,7 @@ function HomePage() {
         { id: 'connectdots', icon: '✨', title: 'Connect Dots', gradient: 'linear-gradient(135deg, #667eea, #764ba2)', path: '/connectdots' },
         { id: 'music', icon: '🎹', title: 'Music Keyboard', gradient: 'linear-gradient(135deg, #2C3E50, #4CA1AF)', path: '/music' },
         { id: 'catch', icon: '🧺', title: 'Catch Game', gradient: 'linear-gradient(135deg, #87CEEB, #98D8C8)', path: '/catch' },
+        { id: 'progress', icon: '📊', title: 'My Progress', gradient: 'linear-gradient(135deg, #f093fb, #f5576c)', path: '/progress' },
         { id: 'settings', icon: '⚙️', title: 'Settings', gradient: 'var(--gradient-sunset)', path: '/settings' },
     ];
 
