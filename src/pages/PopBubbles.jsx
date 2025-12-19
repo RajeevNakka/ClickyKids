@@ -57,19 +57,19 @@ function PopBubbles() {
         const spawnInterval = setInterval(() => {
             const content = bubbleContent[mode];
             const item = content[Math.floor(Math.random() * content.length)];
-            const size = 60 + Math.random() * 40;
+            const size = 70 + Math.random() * 50;
 
             const newBubble = {
                 id: bubbleIdRef.current++,
                 content: item,
                 x: 10 + Math.random() * 70,
                 size,
-                speed: 2 + Math.random() * 3,
+                speed: 0.8 + Math.random() * 1.2, // Much slower speed
                 y: 100,
             };
 
             setBubbles(prev => [...prev, newBubble]);
-        }, 800);
+        }, 1200); // Spawn less frequently
 
         return () => clearInterval(spawnInterval);
     }, [isPlaying, mode]);
@@ -81,7 +81,7 @@ function PopBubbles() {
         const animFrame = setInterval(() => {
             setBubbles(prev =>
                 prev
-                    .map(b => ({ ...b, y: b.y - b.speed * 0.5 }))
+                    .map(b => ({ ...b, y: b.y - b.speed * 0.3 })) // Slower movement
                     .filter(b => b.y > -20)
             );
         }, 50);
