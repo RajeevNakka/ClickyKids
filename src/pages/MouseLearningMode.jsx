@@ -33,13 +33,17 @@ function MouseLearningMode() {
         };
     }, [showMenu, startSession, endSession]);
 
-    // Speak welcome message
+    // Speak welcome message only when entering explore mode
     useEffect(() => {
-        speak(t('mouse.exploreDesc'));
-    }, [speak, t]);
+        if (!showMenu) {
+            speak(t('mouse.exploreDesc'));
+        }
+    }, [showMenu, speak, t]);
 
-    // Audio feedback for mouse actions
+    // Audio feedback for mouse actions (only in explore mode)
     useEffect(() => {
+        if (showMenu) return; // Only when exploring
+
         const now = Date.now();
 
         // Debounce feedback (don't repeat within 1.5 seconds)
@@ -56,10 +60,12 @@ function MouseLearningMode() {
             speak(t('feedback.niceScroll'));
             setLastFeedback(now);
         }
-    }, [mouseState.leftClick, mouseState.rightClick, mouseState.isScrolling, feedback, speak, playSound, lastFeedback, t]);
+    }, [showMenu, mouseState.leftClick, mouseState.rightClick, mouseState.isScrolling, feedback, speak, playSound, lastFeedback, t]);
 
-    // Handle movement feedback (less frequent)
+    // Handle movement feedback (less frequent, only in explore mode)
     useEffect(() => {
+        if (showMenu) return; // Only when exploring
+
         const interval = setInterval(() => {
             // Random chance to give movement encouragement
             if (Math.random() < 0.1) {
@@ -74,7 +80,7 @@ function MouseLearningMode() {
         }, 10000);
 
         return () => clearInterval(interval);
-    }, [speak, t]);
+    }, [showMenu, speak, t]);
 
     const handleStartExplore = () => {
         setShowMenu(false);
