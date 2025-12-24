@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAudio } from '../hooks/useAudio';
 import { useProgress } from '../contexts/ProgressContext';
+import CelebrationOverlay from '../components/common/CelebrationOverlay';
 import './MemoryMatch.css';
 
 // Card sets for the game
@@ -140,16 +141,14 @@ function MemoryMatch() {
             </div>
 
             {isComplete && (
-                <div className="complete-overlay">
-                    <div className="complete-content animate-pop">
-                        <span className="complete-emoji">🎉</span>
-                        <h2>Amazing!</h2>
-                        <p>Completed in {moves} moves</p>
-                        <button className="btn btn-success" onClick={() => initializeGame(cardSet)}>
-                            Play Again
-                        </button>
-                    </div>
-                </div>
+                <CelebrationOverlay
+                    message="Amazing!"
+                    subMessage={`Completed in ${moves} moves`}
+                    onPlayAgain={() => initializeGame(cardSet)}
+                    onNewGame={() => setCardSet(null)}
+                    playAgainText="Play Again"
+                    newGameText="New Set"
+                />
             )}
         </div>
     );

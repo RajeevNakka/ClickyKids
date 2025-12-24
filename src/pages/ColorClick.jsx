@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAudio } from '../hooks/useAudio';
 import { useProgress } from '../contexts/ProgressContext';
+import CelebrationOverlay from '../components/common/CelebrationOverlay';
 import './ColorClick.css';
 
 // Color palettes and pictures
@@ -249,23 +250,16 @@ function ColorClick() {
                 </button>
             )}
 
-            {/* Completion Banner - at bottom, doesn't cover the art */}
+            {/* Celebration Overlay */}
             {isComplete && (
-                <div className="complete-banner animate-slideUp">
-                    <span className="complete-emoji">🎨</span>
-                    <div className="complete-text">
-                        <strong>Beautiful!</strong>
-                        <span>You colored the {picture.name}!</span>
-                    </div>
-                    <div className="complete-buttons">
-                        <button className="btn btn-success btn-small" onClick={() => startPicture(pictureId)}>
-                            Again
-                        </button>
-                        <button className="btn btn-small" onClick={() => setPictureId(null)}>
-                            New
-                        </button>
-                    </div>
-                </div>
+                <CelebrationOverlay
+                    message="Beautiful!"
+                    subMessage={`You colored the ${picture.name}!`}
+                    onPlayAgain={() => startPicture(pictureId)}
+                    onNewGame={() => setPictureId(null)}
+                    playAgainText="Again"
+                    newGameText="New Picture"
+                />
             )}
         </div>
     );

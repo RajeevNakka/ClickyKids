@@ -1,0 +1,99 @@
+/* Celebration Overlay - Translucent with Confetti */
+.celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Confetti Container */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -50px;
+    animation: confettiFall linear forwards;
+    opacity: 0.9;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0.5;
+    }
+}
+
+/* Celebration Content */
+.celebration-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-3xl);
+    z-index: 10;
+}
+
+.celebration-message {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-5xl);
+    color: white;
+    text-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.3);
+    margin-bottom: var(--spacing-md);
+}
+
+.celebration-sub {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.celebration-buttons {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.celebration-buttons .btn {
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .celebration-message {
+        font-size: var(--font-size-3xl);
+    }
+
+    .celebration-sub {
+        font-size: var(--font-size-lg);
+    }
+
+    .celebration-buttons {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}

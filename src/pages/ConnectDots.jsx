@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAudio } from '../hooks/useAudio';
 import { useProgress } from '../contexts/ProgressContext';
+import CelebrationOverlay from '../components/common/CelebrationOverlay';
 import './ConnectDots.css';
 
 // Dot patterns that form shapes
@@ -210,16 +211,14 @@ function ConnectDots() {
             </div>
 
             {isComplete && (
-                <div className="complete-banner animate-pop">
-                    <span className="complete-emoji">{pattern.emoji}</span>
-                    <span>Great job!</span>
-                    <button className="btn btn-success" onClick={() => startPattern(patternId)}>
-                        Again
-                    </button>
-                    <button className="btn" onClick={() => setPatternId(null)}>
-                        New Shape
-                    </button>
-                </div>
+                <CelebrationOverlay
+                    message={`${pattern.emoji} ${pattern.name}!`}
+                    subMessage="You connected all the dots!"
+                    onPlayAgain={() => startPattern(patternId)}
+                    onNewGame={() => setPatternId(null)}
+                    playAgainText="Again"
+                    newGameText="New Shape"
+                />
             )}
         </div>
     );

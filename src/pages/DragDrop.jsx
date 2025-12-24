@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAudio } from '../hooks/useAudio';
 import { useProgress } from '../contexts/ProgressContext';
+import CelebrationOverlay from '../components/common/CelebrationOverlay';
 import './DragDrop.css';
 
 // Sorting categories
@@ -205,16 +206,14 @@ function DragDrop() {
             </div>
 
             {isComplete && (
-                <div className="complete-overlay">
-                    <div className="complete-content animate-pop">
-                        <span className="complete-emoji">🎉</span>
-                        <h2>Great Job!</h2>
-                        <p>You sorted all {game.items.length} items!</p>
-                        <button className="btn btn-success" onClick={() => startGame(gameType)}>
-                            Play Again
-                        </button>
-                    </div>
-                </div>
+                <CelebrationOverlay
+                    message="Great Job!"
+                    subMessage={`You sorted all ${game.items.length} items!`}
+                    onPlayAgain={() => startGame(gameType)}
+                    onNewGame={() => setGameType(null)}
+                    playAgainText="Play Again"
+                    newGameText="New Game"
+                />
             )}
         </div>
     );
