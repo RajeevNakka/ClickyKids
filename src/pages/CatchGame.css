@@ -90,11 +90,12 @@
 
 /* Game Area */
 .game-area {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #87CEEB 0%, #98D8C8 100%);
 }
 
 /* Falling Items */
