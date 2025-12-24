@@ -11,12 +11,12 @@ const categories = {
         icon: '🦁',
         background: 'forest',
         items: [
-            { id: 'lion', emoji: '🦁', name: 'Lion', sound: 'roars', soundUrl: 'https://www.soundjay.com/animals/lion-roar-01.mp3' },
-            { id: 'elephant', emoji: '🐘', name: 'Elephant', sound: 'trumpets', soundUrl: 'https://www.soundjay.com/animals/elephant-1.mp3' },
-            { id: 'dog', emoji: '🐕', name: 'Dog', sound: 'barks', soundUrl: 'https://www.soundjay.com/animals/dog-barking-1.mp3' },
-            { id: 'cat', emoji: '🐱', name: 'Cat', sound: 'meows', soundUrl: 'https://www.soundjay.com/animals/cat-meow-1.mp3' },
-            { id: 'bird', emoji: '🐦', name: 'Bird', sound: 'chirps', soundUrl: 'https://www.soundjay.com/animals/bird-chirping-1.mp3' },
-            { id: 'cow', emoji: '🐄', name: 'Cow', sound: 'moos', soundUrl: 'https://www.soundjay.com/animals/cow-moo-1.mp3' },
+            { id: 'lion', emoji: '🦁', name: 'Lion', sound: 'roars', soundType: 'lion' },
+            { id: 'elephant', emoji: '🐘', name: 'Elephant', sound: 'trumpets', soundType: 'elephant' },
+            { id: 'dog', emoji: '🐕', name: 'Dog', sound: 'barks', soundType: 'dog' },
+            { id: 'cat', emoji: '🐱', name: 'Cat', sound: 'meows', soundType: 'cat' },
+            { id: 'bird', emoji: '🐦', name: 'Bird', sound: 'chirps', soundType: 'bird' },
+            { id: 'cow', emoji: '🐄', name: 'Cow', sound: 'moos', soundType: 'cow' },
         ]
     },
     fruits: {
@@ -33,17 +33,98 @@ const categories = {
     }
 };
 
-// Play animal sound from URL
-const playAnimalSound = (url) => {
-    if (!url) return;
+// Synthesize animal sounds using Web Audio API
+const playAnimalSound = (soundType) => {
+    if (!soundType) return;
+
     try {
-        const audio = new Audio(url);
-        audio.volume = 0.5;
-        audio.play().catch(() => {
-            console.log('Could not play animal sound');
-        });
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        // Different sound patterns for each animal
+        switch (soundType) {
+            case 'lion':
+                // Deep rumbling roar
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(120, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.5);
+                gainNode.gain.setValueAtTime(0.4, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.8);
+                break;
+
+            case 'elephant':
+                // Trumpet sound
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(200, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.2);
+                oscillator.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.5);
+                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.6);
+                break;
+
+            case 'dog':
+                // Bark - quick high then low
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(400, ctx.currentTime);
+                oscillator.frequency.setValueAtTime(300, ctx.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(400, ctx.currentTime + 0.2);
+                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, ctx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.3, ctx.currentTime + 0.2);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.35);
+                break;
+
+            case 'cat':
+                // Meow - rising then falling
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(300, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.15);
+                oscillator.frequency.exponentialRampToValueAtTime(350, ctx.currentTime + 0.4);
+                gainNode.gain.setValueAtTime(0.25, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.5);
+                break;
+
+            case 'bird':
+                // Chirp - quick high notes
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(1000, ctx.currentTime);
+                oscillator.frequency.setValueAtTime(1200, ctx.currentTime + 0.05);
+                oscillator.frequency.setValueAtTime(1000, ctx.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(1300, ctx.currentTime + 0.15);
+                gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.25);
+                break;
+
+            case 'cow':
+                // Moo - low sustained note
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(150, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(130, ctx.currentTime + 0.6);
+                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.7);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.7);
+                break;
+
+            default:
+                return;
+        }
     } catch (e) {
-        console.log('Audio error:', e);
+        console.log('Audio synthesis error:', e);
     }
 };
 
@@ -118,11 +199,11 @@ function ExploreMode({ category, onBack, t }) {
     }, []);
 
     const handleItemClick = (item) => {
-        // Play real animal sound if available
-        if (item.soundUrl) {
-            playAnimalSound(item.soundUrl);
+        // Play synthesized animal sound if available
+        if (item.soundType) {
+            playAnimalSound(item.soundType);
             // Say just the name after a brief delay
-            setTimeout(() => speak(`${item.name}!`), 500);
+            setTimeout(() => speak(`${item.name}!`), 600);
         } else {
             // For fruits, just speak
             speak(`This is a ${item.name}. It is ${item.sound}!`);
