@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useProfile } from '../../contexts/ProfileContext';
 import './GlobalCursor.css';
 
+// Pages where custom cursor should be hidden (games with their own cursor/pointer)
+const hiddenCursorPages = ['/catch', '/chickennest', '/bubbles'];
+
 function GlobalCursor() {
     const { activeProfile } = useProfile();
+    const location = useLocation();
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isVisible, setIsVisible] = useState(false);
 
     const difficulty = activeProfile?.difficulty || 'beginner';
     const cursorClass = difficulty === 'beginner' ? 'easy' : difficulty === 'intermediate' ? 'medium' : 'advanced';
+
+    // Check if we should hide cursor on this page
+    const shouldHide = hiddenCursorPages.some(page => location.pathname.startsWith(page));
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -30,7 +38,8 @@ function GlobalCursor() {
         };
     }, [isVisible]);
 
-    if (!isVisible) return null;
+    // Don't show on hidden cursor pages or if not visible
+    if (!isVisible || shouldHide) return null;
 
     return (
         <div
@@ -44,3 +53,4 @@ function GlobalCursor() {
 }
 
 export default GlobalCursor;
+
