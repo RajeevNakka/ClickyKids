@@ -164,24 +164,27 @@ function ColorClick() {
             </div>
 
             {/* Reset button */}
-            <button className="btn reset-btn" onClick={() => setFilledColors({})}>
-                🔄 Reset
-            </button>
+            {!isComplete && (
+                <button className="btn reset-btn" onClick={() => setFilledColors({})}>
+                    🔄 Reset
+                </button>
+            )}
 
+            {/* Completion Banner - at bottom, doesn't cover the art */}
             {isComplete && (
-                <div className="complete-overlay">
-                    <div className="complete-content animate-pop">
-                        <span className="complete-emoji">🎨</span>
-                        <h2>Beautiful!</h2>
-                        <p>You colored the {picture.name}!</p>
-                        <div className="complete-buttons">
-                            <button className="btn btn-success" onClick={() => startPicture(pictureId)}>
-                                Color Again
-                            </button>
-                            <button className="btn" onClick={() => setPictureId(null)}>
-                                New Picture
-                            </button>
-                        </div>
+                <div className="complete-banner animate-slideUp">
+                    <span className="complete-emoji">🎨</span>
+                    <div className="complete-text">
+                        <strong>Beautiful!</strong>
+                        <span>You colored the {picture.name}!</span>
+                    </div>
+                    <div className="complete-buttons">
+                        <button className="btn btn-success btn-small" onClick={() => startPicture(pictureId)}>
+                            Again
+                        </button>
+                        <button className="btn btn-small" onClick={() => setPictureId(null)}>
+                            New
+                        </button>
                     </div>
                 </div>
             )}
