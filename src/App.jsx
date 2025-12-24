@@ -24,6 +24,7 @@ import ABCMode from './pages/ABCMode';
 import BadgesPage from './pages/BadgesPage';
 import StoryMode from './pages/StoryMode';
 import DailyChallenge from './pages/DailyChallenge';
+import ChickenNest from './pages/ChickenNest';
 import ProgressDashboard from './pages/ProgressDashboard';
 import ParentDashboard from './pages/ParentDashboard';
 
@@ -103,6 +104,7 @@ function App() {
           <Route path="/abc" element={<ABCMode />} />
           <Route path="/story" element={<StoryMode />} />
           <Route path="/daily" element={<DailyChallenge />} />
+          <Route path="/chickennest" element={<ChickenNest />} />
 
           {/* Rewards */}
           <Route path="/badges" element={<BadgesPage />} />

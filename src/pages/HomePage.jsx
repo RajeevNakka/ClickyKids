@@ -32,6 +32,7 @@ const sections = [
         items: [
             { id: 'memory', icon: '🧠', title: 'Memory', gradient: 'var(--gradient-primary)', path: '/memory' },
             { id: 'bubbles', icon: '🎈', title: 'Bubbles', gradient: 'var(--gradient-sunrise)', path: '/bubbles' },
+            { id: 'chickennest', icon: '🐔', title: 'Chickens', gradient: 'linear-gradient(135deg, #87CEEB, #228B22)', path: '/chickennest' },
             { id: 'simon', icon: '🎯', title: 'Simon', gradient: 'linear-gradient(135deg, #1a1a2e, #4a4a6a)', path: '/simon' },
             { id: 'dragdrop', icon: '📦', title: 'Sorting', gradient: 'linear-gradient(135deg, #11998e, #38ef7d)', path: '/dragdrop' },
             { id: 'colorclick', icon: '🎨', title: 'Coloring', gradient: 'linear-gradient(135deg, #ff9a9e, #fecfef)', path: '/colorclick' },
