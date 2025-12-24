@@ -64,7 +64,7 @@ function CatchGame() {
                 emoji,
                 x: 5 + Math.random() * 90, // Full width spawn
                 y: -10,
-                speed: 1 + Math.random() * 1.5,
+                speed: 0.3 + Math.random() * 0.5, // Slower falling
             };
 
             setItems(prev => [...prev, newItem]);

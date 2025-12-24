@@ -12,8 +12,18 @@
 
 .catch-page.playing {
     padding: 0;
-    cursor: none;
     overflow: hidden;
+}
+
+/* Game Area */
+.game-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #87CEEB 0%, #98D8C8 100%);
+    cursor: none;
 }
 
 .catch-title {
@@ -86,16 +96,6 @@
 
 .hud-time {
     color: #3B82F6;
-}
-
-/* Game Area */
-.game-area {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(180deg, #87CEEB 0%, #98D8C8 100%);
 }
 
 /* Falling Items */
