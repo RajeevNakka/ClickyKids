@@ -1,5 +1,6 @@
 .learn-page {
     min-height: 100vh;
+    height: 100vh;
     padding: var(--spacing-xl);
     padding-top: 100px;
     display: flex;
@@ -7,6 +8,7 @@
     align-items: center;
     background: var(--gradient-candy);
     position: relative;
+    overflow: hidden;
 }
 
 /* Backgrounds - Simple gradients */

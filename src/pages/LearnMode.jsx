@@ -11,12 +11,12 @@ const categories = {
         icon: '🦁',
         background: 'forest',
         items: [
-            { id: 'lion', emoji: '🦁', name: 'Lion', sound: 'roars' },
-            { id: 'elephant', emoji: '🐘', name: 'Elephant', sound: 'trumpets' },
-            { id: 'dog', emoji: '🐕', name: 'Dog', sound: 'barks' },
-            { id: 'cat', emoji: '🐱', name: 'Cat', sound: 'meows' },
-            { id: 'bird', emoji: '🐦', name: 'Bird', sound: 'chirps' },
-            { id: 'cow', emoji: '🐄', name: 'Cow', sound: 'moos' },
+            { id: 'lion', emoji: '🦁', name: 'Lion', sound: 'roars', soundUrl: 'https://www.soundjay.com/animals/lion-roar-01.mp3' },
+            { id: 'elephant', emoji: '🐘', name: 'Elephant', sound: 'trumpets', soundUrl: 'https://www.soundjay.com/animals/elephant-1.mp3' },
+            { id: 'dog', emoji: '🐕', name: 'Dog', sound: 'barks', soundUrl: 'https://www.soundjay.com/animals/dog-barking-1.mp3' },
+            { id: 'cat', emoji: '🐱', name: 'Cat', sound: 'meows', soundUrl: 'https://www.soundjay.com/animals/cat-meow-1.mp3' },
+            { id: 'bird', emoji: '🐦', name: 'Bird', sound: 'chirps', soundUrl: 'https://www.soundjay.com/animals/bird-chirping-1.mp3' },
+            { id: 'cow', emoji: '🐄', name: 'Cow', sound: 'moos', soundUrl: 'https://www.soundjay.com/animals/cow-moo-1.mp3' },
         ]
     },
     fruits: {
@@ -30,6 +30,20 @@ const categories = {
             { id: 'mango', emoji: '🥭', name: 'Mango', sound: 'delicious' },
             { id: 'watermelon', emoji: '🍉', name: 'Watermelon', sound: 'refreshing' },
         ]
+    }
+};
+
+// Play animal sound from URL
+const playAnimalSound = (url) => {
+    if (!url) return;
+    try {
+        const audio = new Audio(url);
+        audio.volume = 0.5;
+        audio.play().catch(() => {
+            console.log('Could not play animal sound');
+        });
+    } catch (e) {
+        console.log('Audio error:', e);
     }
 };
 
@@ -104,9 +118,13 @@ function ExploreMode({ category, onBack, t }) {
     }, []);
 
     const handleItemClick = (item) => {
-        if (category === 'animals') {
-            speak(`This is a ${item.name}. The ${item.name} ${item.sound}!`);
+        // Play real animal sound if available
+        if (item.soundUrl) {
+            playAnimalSound(item.soundUrl);
+            // Say just the name after a brief delay
+            setTimeout(() => speak(`${item.name}!`), 500);
         } else {
+            // For fruits, just speak
             speak(`This is a ${item.name}. It is ${item.sound}!`);
         }
         playSound('click');
