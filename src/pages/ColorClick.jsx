@@ -37,6 +37,85 @@ const pictures = {
             { id: 4, name: 'window', path: 'M65,60 L80,60 L80,75 L65,75 Z', targetColor: '#87CEEB' },
         ],
     },
+    sun: {
+        name: 'Sun',
+        preview: '☀️',
+        regions: [
+            { id: 1, name: 'center', path: 'M50,50 m-25,0 a25,25 0 1,0 50,0 a25,25 0 1,0 -50,0', targetColor: '#F7DC6F' },
+            { id: 2, name: 'ray 1', path: 'M50,5 L55,20 L45,20 Z', targetColor: '#F5B041' },
+            { id: 3, name: 'ray 2', path: 'M50,95 L55,80 L45,80 Z', targetColor: '#F5B041' },
+            { id: 4, name: 'ray 3', path: 'M5,50 L20,45 L20,55 Z', targetColor: '#F5B041' },
+            { id: 5, name: 'ray 4', path: 'M95,50 L80,45 L80,55 Z', targetColor: '#F5B041' },
+        ],
+    },
+    tree: {
+        name: 'Tree',
+        preview: '🌳',
+        regions: [
+            { id: 1, name: 'trunk', path: 'M40,60 L60,60 L55,95 L45,95 Z', targetColor: '#8B4513' },
+            { id: 2, name: 'leaves top', path: 'M50,5 L75,40 L25,40 Z', targetColor: '#2ECC71' },
+            { id: 3, name: 'leaves mid', path: 'M50,20 L80,55 L20,55 Z', targetColor: '#27AE60' },
+            { id: 4, name: 'leaves bot', path: 'M50,35 L85,70 L15,70 Z', targetColor: '#229954' },
+        ],
+    },
+    fish: {
+        name: 'Fish',
+        preview: '🐟',
+        regions: [
+            { id: 1, name: 'body', path: 'M20,50 Q50,20 80,50 Q50,80 20,50', targetColor: '#3498DB' },
+            { id: 2, name: 'tail', path: 'M10,50 L25,35 L25,65 Z', targetColor: '#2980B9' },
+            { id: 3, name: 'eye', path: 'M65,45 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0', targetColor: '#2C3E50' },
+            { id: 4, name: 'fin', path: 'M45,35 L55,20 L55,35 Z', targetColor: '#1ABC9C' },
+        ],
+    },
+    car: {
+        name: 'Car',
+        preview: '🚗',
+        regions: [
+            { id: 1, name: 'body', path: 'M10,50 L90,50 L90,70 L10,70 Z', targetColor: '#E74C3C' },
+            { id: 2, name: 'top', path: 'M25,30 L75,30 L85,50 L15,50 Z', targetColor: '#E74C3C' },
+            { id: 3, name: 'window 1', path: 'M30,35 L48,35 L52,48 L22,48 Z', targetColor: '#87CEEB' },
+            { id: 4, name: 'window 2', path: 'M52,35 L70,35 L78,48 L48,48 Z', targetColor: '#87CEEB' },
+            { id: 5, name: 'wheel 1', path: 'M25,70 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0', targetColor: '#2C3E50' },
+            { id: 6, name: 'wheel 2', path: 'M75,70 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0', targetColor: '#2C3E50' },
+        ],
+    },
+    rainbow: {
+        name: 'Rainbow',
+        preview: '🌈',
+        regions: [
+            { id: 1, name: 'red band', path: 'M10,80 Q50,10 90,80 L85,80 Q50,20 15,80 Z', targetColor: '#FF6B6B' },
+            { id: 2, name: 'orange band', path: 'M15,80 Q50,20 85,80 L80,80 Q50,30 20,80 Z', targetColor: '#F5B041' },
+            { id: 3, name: 'yellow band', path: 'M20,80 Q50,30 80,80 L75,80 Q50,40 25,80 Z', targetColor: '#F7DC6F' },
+            { id: 4, name: 'green band', path: 'M25,80 Q50,40 75,80 L70,80 Q50,50 30,80 Z', targetColor: '#2ECC71' },
+            { id: 5, name: 'blue band', path: 'M30,80 Q50,50 70,80 L65,80 Q50,60 35,80 Z', targetColor: '#3498DB' },
+            { id: 6, name: 'purple band', path: 'M35,80 Q50,60 65,80 L60,80 Q50,70 40,80 Z', targetColor: '#9B59B6' },
+        ],
+    },
+    rocket: {
+        name: 'Rocket',
+        preview: '🚀',
+        regions: [
+            { id: 1, name: 'body', path: 'M40,20 L60,20 L65,70 L35,70 Z', targetColor: '#ECF0F1' },
+            { id: 2, name: 'nose', path: 'M50,5 L60,20 L40,20 Z', targetColor: '#E74C3C' },
+            { id: 3, name: 'window', path: 'M50,35 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0', targetColor: '#3498DB' },
+            { id: 4, name: 'left fin', path: 'M35,70 L20,90 L35,85 Z', targetColor: '#E74C3C' },
+            { id: 5, name: 'right fin', path: 'M65,70 L80,90 L65,85 Z', targetColor: '#E74C3C' },
+            { id: 6, name: 'flame', path: 'M40,85 L50,100 L60,85 Z', targetColor: '#F5B041' },
+        ],
+    },
+    star: {
+        name: 'Star',
+        preview: '⭐',
+        regions: [
+            { id: 1, name: 'point 1', path: 'M50,5 L55,35 L50,40 L45,35 Z', targetColor: '#F7DC6F' },
+            { id: 2, name: 'point 2', path: 'M80,35 L55,45 L50,40 L55,35 Z', targetColor: '#F7DC6F' },
+            { id: 3, name: 'point 3', path: 'M70,75 L55,50 L50,55 L55,45 Z', targetColor: '#F7DC6F' },
+            { id: 4, name: 'point 4', path: 'M30,75 L45,50 L50,55 L45,45 Z', targetColor: '#F7DC6F' },
+            { id: 5, name: 'point 5', path: 'M20,35 L45,45 L50,40 L45,35 Z', targetColor: '#F7DC6F' },
+            { id: 6, name: 'center', path: 'M45,35 L55,35 L55,45 L55,50 L50,55 L45,50 L45,45 Z', targetColor: '#F5B041' },
+        ],
+    },
 };
 
 const colorPalette = [
