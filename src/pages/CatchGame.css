@@ -20,7 +20,7 @@
     overflow: hidden;
 }
 
-/* Game Area */
+/* Game Area - hide cursor only during active gameplay */
 .game-area {
     position: fixed;
     top: 0;
@@ -28,8 +28,16 @@
     width: 100vw;
     height: 100vh;
     background: linear-gradient(180deg, #87CEEB 0%, #98D8C8 100%);
-    cursor: none;
     overflow: hidden;
+}
+
+.game-area.active {
+    cursor: none;
+}
+
+/* Show cursor on game over */
+.game-over {
+    cursor: auto;
 }
 
 .catch-title {

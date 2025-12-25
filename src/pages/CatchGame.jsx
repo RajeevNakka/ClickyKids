@@ -190,7 +190,7 @@ function CatchGame() {
             </div>
 
             {/* Falling items */}
-            <div className="game-area">
+            <div className={`game-area ${isPlaying ? 'active' : ''}`}>
                 {items.map(item => (
                     <div
                         key={item.id}
